@@ -20,6 +20,5 @@ public class UserResource {
     @GET
     public Response listAllUser() {
         return Response.ok().build();
-
     }
 }
