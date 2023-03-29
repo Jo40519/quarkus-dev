@@ -1,7 +1,6 @@
 package io.githbu.Jo40519.quarkussocial.rest;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -17,7 +16,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
 
 import io.githbu.Jo40519.quarkussocial.domain.Followers;
 import io.githbu.Jo40519.quarkussocial.domain.User;
