@@ -1,0 +1,53 @@
+<section>
+  <p-messages></p-messages>
+  <p-card class="flex justify-content-center" [header]="'Criar uma nova conta'" [style]="{width: '70%'}">
+    <form [formGroup]="formCadastrarEditarUsuario" (ngSubmit)="cadastrarUsuario()">
+      <section class="formgrid grid">
+        <div class="field col-12 md:col-4 mt">
+          <span class="p-float-label">
+            <input type="text" pInputText
+              class="w-full hover:border-cyan-800 focus:border-cyan-900 valid:border-cyan-800" formControlName="name" />
+            <label for="inputtext">Nome</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4 mt">
+          <span class="p-float-label">
+            <input type="number" pInputText
+              class="w-full hover:border-cyan-800 focus:border-cyan-900 valid:border-cyan-800" formControlName="age" />
+            <label for="inputtext">Idade</label>
+          </span>
+        </div>
+        <div class="field col-12 md:col-4 mt">
+          <span class="p-float-label">
+            <input type="email" pInputText
+              class="w-full hover:border-cyan-800 focus:border-cyan-900 valid:border-cyan-800"
+              formControlName="email" />
+            <label for="inputtext">Email</label>
+          </span>
+        </div>
+
+        <div class="field col-12 md:col-6 mt-4">
+          <span class="p-float-label">
+            <input type="password" pInputText
+              class="w-full hover:border-cyan-800 focus:border-cyan-900 valid:border-cyan-800"
+              formControlName="senha" />
+            <label for="inputtext">Nova Senha</label>
+          </span>
+        </div>
+        <div *ngFor="let sexOptions of codigoService.todosDetalhesSexo" class="field col-12 md:col-2 mt-4">
+          <div class="flex align-items-center">
+            <p-radioButton [value]="sexOptions.descricao" formControlName="sexo" name="sexo"
+              [label]="sexOptions?.descricao" *ngIf="sexOptions?.descricao"></p-radioButton>
+          </div>
+        </div>
+
+      </section>
+
+      <footer class="flex justify-content-end mt-5">
+        <button routerLink="/login" pButton class="p-button-danger mr-4">Cancelar</button>
+        <button [disabled]="!formCadastrarEditarUsuario.valid" pButton type="submit" class="p-button-success">Criar
+          Conta</button>
+      </footer>
+    </form>
+  </p-card>
+</section>

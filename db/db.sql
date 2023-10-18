@@ -3,7 +3,10 @@ CREATE DATABASE quarkus-social;
 CREATE TABLE USERS (
 	id bigserial not null primary key,
 	name varchar (100) not null,
-	age integer not null
+	age integer not null,
+	email varchar(255) not null,
+	sexo varchar(10) not null
+	senha varchar(255) not null
 )
 
 CREATE TABLE POSTS (

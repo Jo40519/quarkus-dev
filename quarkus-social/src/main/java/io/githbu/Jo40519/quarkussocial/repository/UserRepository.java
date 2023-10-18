@@ -9,4 +9,12 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
     
+    // public User findByEmail(String email) {
+    //     return find("email", email).firstResult();
+    // }
+
+    public User findByEmailAndPassword(String email, String senha) {
+        return find("email = ?1 and senha = ?2", email, senha).firstResult();
+    }
+
 }

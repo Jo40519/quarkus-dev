@@ -39,6 +39,9 @@ public class UserResource {
         final User user = new User();
         user.setAge(userRequest.getAge());
         user.setName(userRequest.getName());
+        user.setEmail(userRequest.getEmail());
+        user.setSexo(userRequest.getSexo());
+        user.setSenha(userRequest.getSenha());
         repository.persist(user);
         return Response.status(Response.Status.CREATED.getStatusCode()).entity(user).build();
     }
@@ -71,6 +74,9 @@ public class UserResource {
         if(user != null) {
             user.setName(userData.getName());
             user.setAge(userData.getAge());
+            user.setEmail(userData.getEmail());
+            user.setSexo(userData.getSexo());
+            user.setSenha(userData.getSenha());
             return Response.noContent().build();
         }
 

@@ -21,4 +21,11 @@ public class User {
     private String name;
     @Column(name = "age")
     private Integer age;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "sexo")
+    private String sexo;
+    @Column(name = "senha")
+    private String senha;
+
 }

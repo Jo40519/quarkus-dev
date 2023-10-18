@@ -15,4 +15,13 @@ public class CreateUserRequest {
 
     @NotNull(message = "Age is required")
     private Integer age;
+
+    @NotNull(message = "Email is required")
+    private String email;
+
+    @NotNull(message = "Sexo is required")
+    private String sexo;
+
+    @NotNull(message = "Senha is required")
+    private String senha;
 }

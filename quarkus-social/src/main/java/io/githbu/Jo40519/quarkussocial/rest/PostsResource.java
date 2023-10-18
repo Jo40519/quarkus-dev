@@ -85,6 +85,7 @@ public class PostsResource {
 
         List<PostResponse> postResponseList = listPost.stream().map(post -> PostResponse.fromEntity(post))
                 .collect(Collectors.toList());
+        
         return Response.ok(postResponseList).build();
     }
 
