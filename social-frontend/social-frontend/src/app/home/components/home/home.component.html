@@ -9,7 +9,11 @@
             <div class="col-9">
                 <textarea [autoResize]="true" placeholder="Criar post" rows="5" cols="70" pInputTextarea></textarea>
                 <div class="mt-4">
-                    <app-posts></app-posts>
+                    <app-posts
+                    *ngIf="userSeguindo"
+                    [userSeguindo]="userSeguindo"
+                    [indexUser]="indexUser"
+                    ></app-posts>
                 </div>
             </div>
         </section>

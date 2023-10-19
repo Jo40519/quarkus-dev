@@ -8,17 +8,17 @@ import lombok.Data;
 public class FollowerResponse {
     private long id;
     private String name;
-    private User user;
+    private User follower;
 
     public FollowerResponse () {
-        
+
     }
     public FollowerResponse (Followers followers) {
-        this(followers.getId(), followers.getFollower().getName(), followers.getUser());
+        this(followers.getId(), followers.getFollower().getName(), followers.getFollower());
     }
-    public FollowerResponse (Long id, String name, User user) {
+    public FollowerResponse (Long id, String name, User follower) {
     this.id = id;
     // this.name = name;
-    this.user = user;
+    this.follower = follower;
     }
 }

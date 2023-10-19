@@ -1,0 +1,14 @@
+<p-card
+  [header]="codigoService.dadosPerfilUsuario.name"
+  subheader="Idade: {{ codigoService.dadosPerfilUsuario.age }} | Email: {{
+    codigoService.dadosPerfilUsuario.email
+  }} | Gênero: {{codigoService.dadosPerfilUsuario.sexo}}"
+>
+
+<button pButton>Deixar de seguir</button>
+
+
+<ng-template pTemplate="footer">
+    <button pButton routerLink="/home">Voltar</button>
+</ng-template>
+</p-card>

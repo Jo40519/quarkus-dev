@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { autenticacaoGuard } from './auth/autenticacao.guard';
 
@@ -24,6 +24,14 @@ const routes: Routes = [
       import(
         './usuarios/cadastrar-editar-usuario/cadastrar-editar-usuario.component'
       ).then((c) => c.CadastrarEditarUsuarioComponent),
+  },
+  {
+    path: 'perfil-seguidores',
+    loadComponent: () =>
+      import(
+        './perfil-seguidores/perfil-seguidores/perfil-seguidores.component'
+      ).then((c) => c.PerfilSeguidoresComponent),
+      canActivate: [autenticacaoGuard]
   },
 ];
 

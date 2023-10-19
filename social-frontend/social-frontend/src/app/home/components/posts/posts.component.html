@@ -1,5 +1,15 @@
-<p-card [style]="{width: '68%'}" subheader="Nome seguidor">
-    <section>
-        <p>Descrição do post</p>
-    </section>
-</p-card>
+<body>
+    <p-card
+      *ngFor="let posts of listaDePosts; let i = index"
+      [style]="{ width: '80%', 'margin-top': '50px'}"
+    >
+    <ng-template pTemplate="header">
+                <h2 class="ml-4 cursor-pointer" (click)="verDados(posts.user)">{{posts.user.name}}</h2>
+
+                <h6 class="ml-4">{{posts.date_time | date:'dd/MM/yyyy HH:mm'}}</h6>
+    </ng-template>
+      <section>
+        <p>{{ posts.text }}</p>
+      </section>
+    </p-card>
+</body>

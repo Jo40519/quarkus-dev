@@ -10,12 +10,16 @@ import { FollowService } from 'src/app/shared/services/follow.service';
 })
 export class HomeComponent implements OnInit {
 
-  seguidor!: FollowerResponse
+  userSeguindo!: FollowerResponse
+  indexUser!: number
 
   constructor(private followService: FollowService, private authService: AuthService) {}
   async ngOnInit() {
-    this.seguidor = await this.followService.listaSeguidores(this.authService.usuarioLogado.id)
-    console.log('SEGUIDOR AQUI', this.seguidor)
+    this.userSeguindo = await this.followService.listaSeguidores(this.authService.usuarioLogado.id)
+    console.log('SEGUIDORES =>', this.userSeguindo)
+    this.userSeguindo.content.forEach((_, index) => {
+      this.indexUser = index;
+    })
   }
 
 }

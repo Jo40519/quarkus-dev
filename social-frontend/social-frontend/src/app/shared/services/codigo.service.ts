@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DetalhesSexo } from 'src/app/enums/sexo';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { DetalhesSexo } from 'src/app/enums/sexo';
 export class CodigoService {
 
   todosDetalhesSexo: Array<DetalhesSexo> =[];
+  dadosPerfilUsuario!: User;
 
   constructor() { 
     this.detalharInformacoesSexo();
