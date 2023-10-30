@@ -1,22 +1,46 @@
-<p-card>
-    <header>
-        <section class="grid">
-            <div class="col-3">
-                <app-sidebar>
-                </app-sidebar>
-            </div>
-    
-            <div class="col-9">
-                <textarea [autoResize]="true" placeholder="Criar post" rows="5" cols="70" pInputTextarea></textarea>
-                <div class="mt-4">
-                    <app-posts
-                    *ngIf="userSeguindo"
-                    [userSeguindo]="userSeguindo"
-                    [indexUser]="indexUser"
-                    ></app-posts>
-                </div>
-            </div>
-        </section>
-    </header>
-</p-card>
+<p-messages></p-messages>
+<p-card class="scalein animation-duration-500 mt-5">
+  <header>
+    <section class="grid">
+      <div class="col-3">
+        <app-sidebar> </app-sidebar>
+      </div>
 
+      <div class="col-9">
+        <form [formGroup]="formPosts" (ngSubmit)="publicarPost()">
+          <textarea
+            formControlName="text"
+            [style]="{ width: '100%' }"
+            [autoResize]="true"
+            placeholder="Criar post"
+            rows="5"
+            cols="100"
+            maxlength="150"
+            pInputTextarea
+          ></textarea>
+          <small *ngIf="formPosts.get('text')?.value?.length! === 150">Você chegou no limite</small>
+          <div class="flex justify-content-end mt-4">
+            <button
+              type="submit"
+              pButton
+              class="mr-3 bg-green-400 hover:bg-green-500 border-green-400"
+            >
+              Publicar
+            </button>
+            <button pButton class="bg-red-400 border-red-400 hover:bg-red-500">
+              Cancelar
+            </button>
+          </div>
+        </form>
+        <div class="mt-4">
+          <app-posts
+            *ngIf="userSeguindo"
+            [userSeguindo]="userSeguindo"
+            [indexUser]="indexUser"
+            [(indicaAtualizarListaPosts)]="indicaAtualizarListaPosts"
+          ></app-posts>
+        </div>
+      </div>
+    </section>
+  </header>
+</p-card>

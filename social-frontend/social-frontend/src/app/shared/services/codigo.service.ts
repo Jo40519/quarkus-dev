@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DetalhesSexo } from 'src/app/enums/sexo';
+import { FollowerResponse } from 'src/app/models/follower-response';
 import { User } from 'src/app/models/user';
 
 @Injectable({
@@ -9,6 +10,8 @@ export class CodigoService {
 
   todosDetalhesSexo: Array<DetalhesSexo> =[];
   dadosPerfilUsuario!: User;
+  seguidoresDoPerfilUsuario!: any;
+  indexParaListarPostsDeCadaPerfil!: number
 
   constructor() { 
     this.detalharInformacoesSexo();

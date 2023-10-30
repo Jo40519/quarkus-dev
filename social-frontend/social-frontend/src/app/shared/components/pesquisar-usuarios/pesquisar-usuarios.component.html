@@ -1,0 +1,32 @@
+<section class="scalein animation-duration-1000">
+  <p-menubar>
+    <ng-template pTemplate="start">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <form [formGroup]="formPesquisar">
+          <p-autoComplete
+            #inputPesquisar
+            formControlName="nameUsuario"
+            (completeMethod)="onSearch($event)"
+            [suggestions]="listaFiltrada"
+            field="name"
+          >
+            <ng-template let-usuario pTemplate="item">
+              <div
+                (click)="irParaPerfil(usuario)"
+                class="flex align-items-center gap-2"
+              >
+                <div>{{ usuario.name }}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </form>
+      </span>
+      <br />
+    </ng-template>
+
+    <ng-template pTemplate="end">
+        <p-inputSwitch [(ngModel)]="indicaTheme" (click)="changeTheme('soho-dark')"></p-inputSwitch>
+    </ng-template>
+  </p-menubar>
+</section>

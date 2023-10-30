@@ -8,12 +8,14 @@ import lombok.Data;
 
 @Data
 public class PostResponse {
+    private Long id;
     private String text;
     private LocalDateTime date_time;
     private User user;
 
     public static PostResponse fromEntity(Posts postResponse) {
         var response = new PostResponse();
+        response.setId(postResponse.getId());
         response.setText(postResponse.getPosts_text());
         response.setDate_time(postResponse.getDate_time());
         response.setUser(postResponse.getUser());

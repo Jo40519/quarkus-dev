@@ -1,14 +1,159 @@
+<p-toast></p-toast>
 <p-card
   [header]="codigoService.dadosPerfilUsuario.name"
   subheader="Idade: {{ codigoService.dadosPerfilUsuario.age }} | Email: {{
     codigoService.dadosPerfilUsuario.email
-  }} | Gênero: {{codigoService.dadosPerfilUsuario.sexo}}"
+  }} | Gênero: {{ codigoService.dadosPerfilUsuario.sexo }}"
+  class="scalein animation-duration-500"
 >
+  <section class="grid">
+    <div class="col-12 md:col-4">
+      <span>Publicações: </span>
+      <strong>{{ listaDePosts.length }}</strong>
+    </div>
+    <div class="col-12 md:col-4">
+      <span> Seguidores: </span>
+      <strong *ngIf="seguidores">{{ seguidores.followerCount }}</strong>
+    </div>
+    <div class="col-12 md:col-4">
+      <span>Seguindo: </span>
+      <strong *ngIf="seguindo">{{ seguindo.content.length }}</strong>
+    </div>
+  </section>
 
-<button pButton>Deixar de seguir</button>
+  <div class="flex justify-content-start mt-5">
+    <p-button
+      class="border-round-sm mr-3"
+      routerLink="/home"
+      label="Voltar"
+    ></p-button>
+    <button
+      *ngIf="dadosPerfilUsuario.id !== usuarioLogado.id"
+      pButton
+      [style]="{
+        border: 'var(--bluegray-300)'
+      }"
+      class="surface-600 border-round-md hover:surface-700"
+      [label]="estaSeguindo ? 'Deixar de seguir' : 'Seguir'"
+      (click)="estaSeguindo ? unfollowUser() : followUser()"
+    ></button>
+  </div>
 
+  <section>
+    <body *ngIf="listaDePosts.length > 0">
+      <p-card
+        *ngFor="let posts of listaDePosts; let i = index"
+        [style]="{ 'margin-top': '50px' }"
+      >
+        <ng-template pTemplate="header">
+          <div class="grid">
+            <div class="col-12 md:col-11">
+              <h2 class="ml-4 cursor-pointer">
+                {{ posts.user.name }}
+              </h2>
+            </div>
+            <div
+              class="col-12 md:col-1"
+              *ngIf="dadosPerfilUsuario.id === usuarioLogado.id"
+            >
+              <button
+                pButton
+                type="button"
+                class="p-button-secondary border-circle"
+                (click)="menu.toggle($event)"
+                icon="pi pi-ellipsis-v"
+              ></button>
+              <p-menu
+                (click)="resgataPost(posts)"
+                #menu
+                [model]="items"
+                [popup]="true"
+              ></p-menu>
+            </div>
+          </div>
 
-<ng-template pTemplate="footer">
-    <button pButton routerLink="/home">Voltar</button>
-</ng-template>
+          <h6 class="ml-4">
+            {{ posts.date_time | date : "dd/MM/yyyy HH:mm" }}
+          </h6>
+        </ng-template>
+        <section>
+          <p style="max-width: 100%; word-wrap: break-word">{{ posts.text }}</p>
+        </section>
+      </p-card>
+    </body>
+
+    <ng-template *ngIf="listaDePosts.length < 0 && estaSeguindo">
+      <p-progressSpinner
+        class="flex justify-content-center"
+        styleClass="w-4rem h-4rem"
+        strokeWidth="8"
+        fill="var(--surface-ground)"
+        animationDuration=".5s"
+      ></p-progressSpinner>
+    </ng-template>
+    <div
+      *ngIf="
+        estaSeguindo === false && dadosPerfilUsuario.id !== usuarioLogado.id
+      "
+    >
+      <h3>{{ "Você não pode ver os posts deste usuário!" }}</h3>
+    </div>
+  </section>
 </p-card>
+
+<p-dialog
+  header="Excluir post"
+  [(visible)]="abrirModalExcluir"
+  [style]="{ width: '50vw' }"
+>
+  <h3>Observação:</h3>
+  <h4>Ao excluir este post, não poderá mais retorna-lo.</h4>
+
+  <div class="flex justify-content-end mt-4">
+    <button
+      pButton
+      class="p-button-danger mr-3"
+      (click)="abrirModalExcluir = false"
+    >
+      Cancelar
+    </button>
+    <button pButton class="p-button-success" (click)="deletaPost()">
+      Excluir
+    </button>
+  </div>
+</p-dialog>
+
+<p-dialog
+  header="Editar post"
+  [(visible)]="abrirModalEditarPost"
+  [style]="{ width: '50vw' }"
+>
+  <form [formGroup]="formEditarPost">
+    <textarea
+      formControlName="text"
+      [style]="{ width: '100%' }"
+      [autoResize]="true"
+      placeholder="Criar post"
+      rows="5"
+      cols="100"
+      maxlength="150"
+      pInputTextarea
+    ></textarea>
+    <small *ngIf="formEditarPost?.get('text')?.value?.length! === 150"
+      >Você chegou no limite</small
+    >
+  </form>
+
+  <div class="flex justify-content-end mt-4">
+    <button
+      pButton
+      class="p-button-danger mr-3"
+      (click)="abrirModalEditarPost = false"
+    >
+      Cancelar
+    </button>
+    <button pButton class="p-button-success" (click)="editarPost()">
+      Editar
+    </button>
+  </div>
+</p-dialog>

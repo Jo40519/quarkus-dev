@@ -18,7 +18,7 @@ public class FollowerResponse {
     }
     public FollowerResponse (Long id, String name, User follower) {
     this.id = id;
-    // this.name = name;
+    this.name = name;
     this.follower = follower;
     }
 }

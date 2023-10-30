@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user';
 export class SidebarComponent implements OnInit {
 
   usuario!: User
+  indicaTheme!: boolean;
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
     console.log('LOGADO NO SIDEBAR', this.authService.usuarioLogado)

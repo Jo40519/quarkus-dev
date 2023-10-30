@@ -57,7 +57,7 @@ public class FollowerResource {
             entity.setFollower(follower);
             this.followerReposiroty.persist(entity);
         }
-        return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.status(Response.Status.NO_CONTENT).entity(user).build();
     }
 
     @GET
@@ -87,6 +87,28 @@ public class FollowerResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         this.followerReposiroty.deleteByFollowerAndUser(followerId, userId);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.status(Response.Status.NO_CONTENT).entity(true).build();
+    }
+
+    @GET
+    @Path("/following")
+    public Response listFollowing(@PathParam("userId") Long userId) {
+        User user = this.userRepository.findById(userId);
+    
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Usuário não encontrado").build();
+        }
+    
+        List<Followers> followingList = this.followerReposiroty.findFollowingByFollower(userId);
+        FollowersPerUserResponse followingResponse = new FollowersPerUserResponse();
+        followingResponse.setFollowerCount(followingList.size());
+    
+        List<FollowerResponse> following = followingList.stream()
+                .map(follower -> new FollowerResponse(follower.getId(), follower.getUser().getName(), follower.getUser()))
+                .collect(Collectors.toList());
+    
+        followingResponse.setContent(following);
+    
+        return Response.ok(followingResponse).build();
     }
 }

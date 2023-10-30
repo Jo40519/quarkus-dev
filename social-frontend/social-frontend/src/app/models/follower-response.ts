@@ -1,5 +1,6 @@
 import { User } from "./user";
 
 export interface FollowerResponse {
-    content: Array<User>
+    content: Array<User>;
+    followerCount: number;
 }

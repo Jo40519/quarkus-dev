@@ -1,15 +1,36 @@
-<body>
-    <p-card
-      *ngFor="let posts of listaDePosts; let i = index"
-      [style]="{ width: '80%', 'margin-top': '50px'}"
-    >
-    <ng-template pTemplate="header">
-                <h2 class="ml-4 cursor-pointer" (click)="verDados(posts.user)">{{posts.user.name}}</h2>
+<body *ngIf="listaDePosts.length > 0; else carregando">
+  <p-card
+    *ngFor="let posts of listaDePosts; let i = index"
+    [style]="{ width: '95%', 'margin-top': '50px' }"
+  >
+    <ng-template  pTemplate="header">
+      <h2 class="ml-4 cursor-pointer" (click)="verDados(posts.user, i)">
+        {{ posts.user.name }}
+      </h2>
 
-                <h6 class="ml-4">{{posts.date_time | date:'dd/MM/yyyy HH:mm'}}</h6>
+      <h6 class="ml-4">{{ posts.date_time | date : "dd/MM/yyyy HH:mm" }}</h6>
     </ng-template>
-      <section>
-        <p>{{ posts.text }}</p>
-      </section>
-    </p-card>
+    <section>
+      <p style="max-width: 100%; word-wrap: break-word;">{{ posts.text }}</p>
+    </section>
+
+
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-between">
+        <p-button label="Curtir" severity="secondary" [text]="true" [raised]="true"><i class="pi pi-thumbs-up mr-2"></i></p-button>
+        <p-button label="Comentar" severity="secondary" [text]="true" [raised]="true"><i class="pi pi-comment mr-2"></i></p-button>
+        <p-button label="Compartilhar" severity="secondary" [text]="true" [raised]="true"><i class="pi pi-sync mr-2"></i></p-button>
+      </div>
+    </ng-template>
+  </p-card>
 </body>
+
+<ng-template #carregando>
+  <p-progressSpinner
+    class="flex justify-content-center"
+    styleClass="w-4rem h-4rem"
+    strokeWidth="8"
+    fill="var(--surface-ground)"
+    animationDuration=".5s"
+  ></p-progressSpinner>
+</ng-template>

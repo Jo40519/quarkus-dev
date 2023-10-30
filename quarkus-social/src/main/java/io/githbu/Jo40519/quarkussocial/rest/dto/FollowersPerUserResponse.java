@@ -7,5 +7,6 @@ import lombok.Data;
 @Data
 public class FollowersPerUserResponse {
     private Integer followerCount;
+    private Integer FollowingCount;
     private List<FollowerResponse> content;
 }

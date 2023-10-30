@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+.fixed-component {
+    position: fixed;
+    top: 0; /* ou a altura desejada em pixels */
+    left: 0; /* ou a posição desejada em pixels */
+    z-index: 999; /* Defina um valor alto para o z-index */
+  }

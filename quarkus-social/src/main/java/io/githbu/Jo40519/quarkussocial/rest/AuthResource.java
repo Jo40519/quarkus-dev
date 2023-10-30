@@ -8,17 +8,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.eclipse.microprofile.jwt.JsonWebToken;
-
 import com.oracle.svm.core.annotate.Inject;
 
 import io.githbu.Jo40519.quarkussocial.domain.Login;
 import io.githbu.Jo40519.quarkussocial.domain.User;
 import io.githbu.Jo40519.quarkussocial.repository.AuthenticationRespository;
-import io.smallrye.jwt.build.Jwt;
-import io.smallrye.jwt.build.JwtClaimsBuilder;
-import io.smallrye.jwt.build.JwtSignatureException;
 
 @Path("/auth")
 @Consumes(MediaType.APPLICATION_JSON)
